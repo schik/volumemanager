@@ -1,0 +1,26 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "setButtonClicked:"
+	);
+	Super = NSObject;
+    };
+    VolumeManager = {
+	Actions = (
+	    "setButtonClicked:"
+	);
+	Outlets = (
+	    automountDrives,
+	    autoplayCDAService,
+	    "_window",
+	    autoplayDVDService,
+	    autoopenFSService,
+	    disableNotifications,
+	    autoopenFilesystem,
+	    autoplayAudioCDs,
+	    autoplayDVDs
+	);
+	Super = NSObject;
+    };
+}

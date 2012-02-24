@@ -1,0 +1,118 @@
+VolumeManager
+=============
+
+Introduction
+------------
+VolumeManager is a tool for GNUstep that listens for hald events concerning
+storage volumes. VolumeManager is then able to automount data devices or to
+autoplay CDs and DVDs using appropriate services.
+VolumeManager can also notify other GNUstep applications via DO if the state
+of any volume changes, e.g. if it is mounted or unmounted.
+VolumeManager runs as a daemon in the background and has only few GUI elements.
+
+VolumeManager is GPL'ed. Read the COPYING file.
+All bugs reports should be sent to Andreas Schik <andreas@schik.de>.
+
+
+GNUstep system
+--------------
+o VolumeManager has been tested on GNU/Linux using the following versions
+  of GNUstep:
+
+gnustep-base	1.21
+gnustep-gui	0.19
+
+o Note, that VolumeManager will probably not run on older versions of GNUstep.
+
+o VolumeManager needs DBusKit to compile and run.
+
+o VolumeManager needs TrayIconKit (https://github.com/schik/trayiconkit) to
+  compile and run.
+
+o VolumeManager needs the pmount tools for automounting support. If those tools
+  are not installed the respective functions will report an error on the command
+  line during run time.
+
+
+How to build VolumeManager
+----------------------------
+o To build VolumeManager simply do the following:
+  make
+
+o To install VolumeManager simply do the following:
+  make install
+
+
+Subprojects
+---------------
+There exists one subproject: Preferences. It is not built or installed by default.
+You need to descend into the respective subdirectory and do this manually if
+desired.
+Preferences is a plugin to SystemPreferences. It provides a GUI to setup the user
+defaults for VolumeManager.
+Simply do a
+    make install
+
+in the Preferences subdirectory to install it.
+
+
+The GUI
+-------
+Even though running as daemon in the background, VolumeManager has a few GUI
+elements. After a data volume has been mounted, an icon will appear in the system
+tray. Clicking on the icon will bring up a window providing a list of mounted
+volumes. This window also provides the possibility to unmount a volume via mouse
+click. As soon as all volumes are unmounted, the icon hides.
+If no system tray application is running on the system, no icon will appear and
+you will not be able to access the list of mounted volumes. In that case, you
+must unmount volumes manually.
+
+If a new volume is mounted, VolumeManager will notify you. It first tries to
+reach the Notification service registered on the d-bus. If no such service exists
+VolumeManager will display a notification using the system tray. If this does not
+exist either, no notification is shown at all.
+
+
+Preferences
+-----------
+Using the preferences panel you may set the following:
+- Switch on and off automounting of data volumes.
+- Define GNUstep services to use for automatically opening mounted file systems
+  and for automatically playing CDs and DVDs.
+- Switch on and off notifications.
+
+
+Using the services to autoopen or autoplay CDs/DVDs
+---------------------------------------------------
+It is possible to use GWorkspace to automatically open a mounted file system.
+Simply use the 'Open in GWorkspace' service to do this. After mounting the
+volume, VolumeManager will then automtically open the mount point in a GWorkspace
+browser window.
+
+CDPlayer 0.5 provides a service for autoplaying audio CDs. Simply use the service
+name "CDPlayer/Play CD". As an alternative you may use Terminal.app to start up
+any other CD playing software. Here is an example for how to create a Termial
+service to start goobox:
+
+    "Play CD" = {
+        AcceptTypes = 1;
+        Commandline = "goobox -d \"%s\" --play &";
+        Input = 2;
+        Key = "";
+        ReturnData = 0;
+        Type = 0;
+    };
+
+To play DVDs, GNUstep does not offer (yet) an appropriate application.
+You may however use Terminal.app to create a service that opens an external
+application, e.g. mplayer:
+
+    "Play DVD" = {
+        AcceptTypes = 1;
+        Commandline = "mplayer dvd://1-99 \"%s\"";
+        Input = 2;
+        Key = "";
+        ReturnData = 0;
+        Type = 1;
+    };
+

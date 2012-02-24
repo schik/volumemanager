@@ -1,0 +1,23 @@
+/***
+English.lproj/Localizable.strings
+updated by make_strings 2007-11-06 19:14:39 +0100
+add comments above this one
+***/
+
+
+/* File: VolumeWindowController.m:292 */
+"RemovableMediaMenulet.message.play.mount"
+= "The media in %@ contains audio and data.\nDo you wish to play the audio or to mount the data part?";
+
+/* File: VolumeWindowController.m:295 */
+"RemovableMediaMenulet.button.play" = "Play";
+
+/* File: VolumeWindowController.m:298 */
+"RemovableMediaMenulet.button.mount" = "Mount";
+
+/* File: VmIconController.m:236 */
+"VmIconController.volume.mounted" = "Volume Mounted";
+
+/* File: VmIconController.m:81 */
+/* File: VmIconController.m:200 */
+"VmIconController.msg.mounted_at" = "%@\n   mounted at %@.\n";

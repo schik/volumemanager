@@ -1,0 +1,22 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "unmountClicked:",
+	    "volumeSelected:"
+	);
+	Super = NSObject;
+    };
+    VolumeWindowController = {
+	Actions = (
+	    "volumeSelected:",
+	    "unmountClicked:"
+	);
+	Outlets = (
+	    window,
+	    mountedVolumes,
+	    unmountButton
+	);
+	Super = NSObject;
+    };
+}

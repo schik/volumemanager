@@ -1,0 +1,9 @@
+
+{
+  CFBundleIdentifier = de.schik.volmanmodule;
+  NSExecutable = VolumeManager;
+  NSMainNibFile = VolumeManager;
+  NSPrincipalClass = VolumeManager;
+  NSPrefPaneIconFile = "VolumeManager.tiff";
+  NSPrefPaneIconLabel = "Volume Manager";
+}
