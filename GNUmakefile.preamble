@@ -11,4 +11,4 @@ ADDITIONAL_CFLAGS += -Wall -g
 #ADDITIONAL_INCLUDE_DIRS +=
 
 # Additional LDFLAGS to pass to the linker
-ADDITIONAL_LDFLAGS += -lDBusKit -lX11
+#ADDITIONAL_LDFLAGS += -lDBusKit -lX11
