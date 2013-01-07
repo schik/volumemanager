@@ -81,11 +81,16 @@
     // Try to find pmount-hal first. This is a safer method as
     // HAL must be set up properly, i.e. it needs the proper
     // helper script which is not always there...
-    NSString *mount = [self which: @"pmount-hal"];
+    NSString *mount = [self which: @"pmount"];
 
-    if (mount != nil) {
+    if ((mount != nil) && (device != nil)) {
         NSTask *task = [[NSTask alloc] init];
-        NSArray *args = [NSArray arrayWithObject: udi];
+        NSArray *args = nil;
+        if ((nil != label) && ![label isEqualToString: @""]) {
+            args = [NSArray arrayWithObjects: device, label, nil];
+        } else {
+            args = [NSArray arrayWithObjects: device, nil];
+        }
         [task setLaunchPath: mount];
         [task setArguments: args];
         NS_DURING
@@ -110,7 +115,7 @@
         DESTROY(task);
         return YES;
     } else {
-        NSLog(@"Cannot find pmount-hal. Not mounting device %@", udi);
+        NSLog(@"Cannot find pmount. Not mounting device %@", udi);
     }
     return NO;
 }
