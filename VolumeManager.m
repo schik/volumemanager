@@ -32,10 +32,7 @@ struct deviceHandler {
     SEL handler;
 };
 
-static struct deviceHandler deviceHandlers[] = {
-    {@"block", @selector(blockDeviceAdded:)},
-    {@"camera", @selector(cameraDeviceAdded:)}
-};
+static struct deviceHandler *deviceHandlers = NULL;
 
 static NSString * const SIG_ACTIONINVOKED = @"DKSignal_org.freedesktop.Notifications_ActionInvoked";
 
@@ -76,6 +73,17 @@ static NSString * const SIG_ACTIONINVOKED = @"DKSignal_org.freedesktop.Notificat
 
 
 @implementation VolumeManager
+
++ (void)initialize
+{
+    if(!deviceHandlers) {
+        deviceHandlers = (struct deviceHandler *)malloc(sizeof(struct deviceHandler)*2);
+        deviceHandlers[0].capability = @"block";
+	deviceHandlers[0].handler = @selector(blockDeviceAdded:);
+        deviceHandlers[0].capability = @"camera";
+	deviceHandlers[0].handler = @selector(cameraDeviceAdded:);
+    }
+}
 
 - (id) init
 {

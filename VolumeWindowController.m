@@ -194,7 +194,7 @@
  * whether it was mounted or unmounted.</desc>
  * </deflist>
  */
-- (void) volumeDidChange: (NSData *)volumeChangeInfo
+- (oneway void) volumeDidChange: (NSData *)volumeChangeInfo
 {
     CREATE_AUTORELEASE_POOL(pool);
     NSDictionary *info = [NSUnarchiver unarchiveObjectWithData: volumeChangeInfo];

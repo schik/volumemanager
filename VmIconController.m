@@ -159,7 +159,7 @@ static const long MSG_TIMEOUT = 10000;
         NSString *mpoint = [info objectForKey: @"mountPoint"];
         
 	msg = [[NSString alloc] initWithFormat: _(@"VmIconController.msg.mounted_at"), label, mpoint];
-        NSDebugLog(msg);
+        NSDebugLog(_(@"VmIconController.msg.mounted_at"), label, mpoint);
 
         // If a mounted device is not opened automatically we offer
         // an action in the notification, by which the user can do
@@ -228,13 +228,13 @@ static const long MSG_TIMEOUT = 10000;
  * whether it was mounted or unmounted.</desc>
  * </deflist>
  */
-- (void) volumeDidChange: (NSData *)volumeChangeInfo
+- (oneway void) volumeDidChange: (NSData *)volumeChangeInfo
 {
     CREATE_AUTORELEASE_POOL(pool);
     NSData *data = [volumeManager getMountedVolumes];
     NSArray *volumes = [NSUnarchiver unarchiveObjectWithData: data];
     // If there are volumes show the icon
-    NSDebugLog(@"No of mounted volumes is %d", [volumes count]);
+    NSDebugLog(@"No of mounted volumes is %lu", (unsigned long)[volumes count]);
     if ([volumes count] > 0) {
         [tic showTrayIcon];
     } else {

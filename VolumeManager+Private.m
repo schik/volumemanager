@@ -405,7 +405,7 @@ done:
     storageDevice = [halHandler getStringProperty: @"block.storage_device"
                                         forDevice: udi];
     if (storageDevice == nil) {
-        NSDebugLog(@"cannot get block.storage_device for %q\n", udi);
+        NSDebugLog(@"cannot get block.storage_device for %@\n", udi);
         goto out;
     }
     
